@@ -8,10 +8,8 @@ defmodule SyncThing.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # {SyncThing.LocalDiscovery.Announcer, []}
-      {SyncThing.Core.Supervisor, []}
-      # Starts a worker by calling: SyncThing.Worker.start_link(arg)
-      # {SyncThing.Worker, arg}
+      {SyncThing.Core.Supervisor, []},
+      {SyncThing.LocalDiscovery.Announcer, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

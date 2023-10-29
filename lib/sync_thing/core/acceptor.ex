@@ -40,7 +40,7 @@ defmodule SyncThing.Core.Acceptor do
   end
 
   defp accept_loop(listen_socket) do
-    case :ssl.transport_accept(listen_socket, 20_000) do
+    case :ssl.transport_accept(listen_socket, :infinity) do
       {:ok, socket} ->
         Logger.debug(":ssl.transport_accept")
         {:ok, _} = SyncThing.Core.ConnectionSupervisor.start_child(socket)

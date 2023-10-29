@@ -9,7 +9,14 @@ defmodule SyncThing.Core.Supervisor do
   def init(_opts) do
     :ssl.start()
 
+    registry_opts = [
+      name: SyncThing.Core.FolderRegistry,
+      keys: :unique
+    ]
+
     children = [
+      {Registry, registry_opts},
+      {SyncThing.Core.FolderSupervisor, []},
       {SyncThing.Core.ConnectionSupervisor, []},
       {SyncThing.Core.Acceptor, []}
       # {SyncThing.Core.LibrarySupervisor, []}
